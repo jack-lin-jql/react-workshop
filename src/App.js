@@ -1,24 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom"
+
+import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div>
+        <nav>
+          <li>
+            <Link to="/page1">Page1</Link>
+          </li>
+          <li>
+            <Link to="/page2">Page2</Link>
+          </li>
+          <li>
+            <Link to="/page3">Page3</Link>
+          </li>
+        </nav>
+      </div>
+
+      {/* Handles matching URL path to specific components */}
+      {/* Switch ensures to render a route exclusively from the first
+      matching path, like a switch case statement */}
+      <Switch>
+        <Route path="/page1">
+          Page 1
+          {/* <Page1 /> */}
+        </Route>
+        <Route path="/page2">
+          Page 2
+          {/* <Page2 /> */}
+        </Route>
+        <Route path="/page3">
+          Page 3
+          {/* <Page3 /> */}
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 

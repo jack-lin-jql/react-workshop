@@ -24,10 +24,10 @@ export const Page3 = (props) => {
 
   return (
     <div>
-      {beersIn3.map((threeBeers) => (
-        <div style={{ display: "flex" }}>
+      {beersIn3.map((threeBeers, index) => (
+        <div key={index} style={{ display: "flex" }}>
           {threeBeers.map((beer) => (
-            <BeerCard beer={beer} />
+            <BeerCard key={beer.name} beer={beer} />
           ))}
         </div>
       ))}

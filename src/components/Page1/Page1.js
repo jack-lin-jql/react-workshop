@@ -27,13 +27,13 @@ export const Page1 = (props) => {
       <thead>
         <tr>
           {["University", "Country", "Web Site"].map((headerTitle) => (
-            <th>{headerTitle}</th>
+            <th key={headerTitle}>{headerTitle}</th>
           ))}
         </tr>
       </thead>
       <tbody>
-        {universities.map((university) => (
-          <tr>
+        {universities.map((university, index) => (
+          <tr key={index}>
             <td>{university.name}</td>
             <td>{university.country}</td>
             <td>

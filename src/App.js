@@ -16,8 +16,12 @@ import "./App.css";
 const fetchCountries = async () => {
   const response = await fetch(
     // Don't ever commit any valuable access key into git!
-    "http://api.countrylayer.com/v2/all?access_key=6b9e046f6758eb9c4e70a9608bce98ac"
+    "http://api.countrylayer.com/v1/all?access_key=6b9e046f6758eb9c4e70a9608bce98ac"
   );
+
+  if (!response.ok)
+    throw new Error(`${response.status}: ${response.statusText}`);
+
   const responseInJSON = await response.json();
   return responseInJSON;
 };
@@ -26,7 +30,12 @@ function App() {
   const [countries, setCountries] = useState();
 
   useEffect(() => {
-    fetchCountries().then((resp) => setCountries(resp));
+    fetchCountries().then((resp) => {
+      setCountries(resp);
+    }).catch((error) => {
+      console.log(error.toString());
+      setCountries([]);
+    });
   },
   // Dependency list, if empty, runs the callback function once
   []);

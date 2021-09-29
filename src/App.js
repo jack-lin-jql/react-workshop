@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -7,7 +9,24 @@ import {
 
 import "./App.css";
 
+const fetchCountries = async () => {
+  const response = await fetch(
+    // Don't ever commit any valuable access key into git!
+    "http://api.countrylayer.com/v2/all?access_key=YOUR_ACCESS_KEY_HERE"
+  );
+  const responseInJSON = await response.json();
+  return responseInJSON;
+};
+
 function App() {
+  const [countries, setCountries] = useState();
+
+  useEffect(() => {
+    fetchCountries().then((resp) => setCountries(resp));
+  },
+  // Dependency list, if empty, runs the callback function once
+  []);
+
   return (
     <Router>
       <div>

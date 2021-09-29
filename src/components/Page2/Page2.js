@@ -29,12 +29,16 @@ export class Page2 extends React.Component {
       <div>
         {this.state.randomDogLinks.map((dogResource, index) => (
           <div key={index}>
-            {dogResource && dogResource.match(/.*\.mp4$/g) ? (
-              <video width="500" controls>
-                <source src={dogResource} type="video/mp4" />
-              </video>
+            {!!dogResource ? (
+              dogResource.match(/.*\.mp4$/g) ? (
+                <video width="500" controls>
+                  <source src={dogResource} type="video/mp4" />
+                </video>
+              ) : (
+                <img src={dogResource} width="500" alt={dogResource} />
+              )
             ) : (
-              <img src={dogResource} width="500" alt={dogResource} />
+              <>Loading...</>
             )}
           </div>
         ))}

@@ -1,0 +1,1 @@
+export const Page2 = () => <>Page2</>;

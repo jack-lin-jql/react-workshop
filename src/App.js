@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 
+import { useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -7,12 +7,16 @@ import {
   Link
 } from "react-router-dom"
 
+import { Page1 } from "./components/Page1";
+import { Page2 } from "./components/Page2";
+import { Page3 } from "./components/Page3";
+
 import "./App.css";
 
 const fetchCountries = async () => {
   const response = await fetch(
     // Don't ever commit any valuable access key into git!
-    "http://api.countrylayer.com/v2/all?access_key=YOUR_ACCESS_KEY_HERE"
+    "http://api.countrylayer.com/v2/all?access_key=6b9e046f6758eb9c4e70a9608bce98ac"
   );
   const responseInJSON = await response.json();
   return responseInJSON;
@@ -48,16 +52,13 @@ function App() {
       matching path, like a switch case statement */}
       <Switch>
         <Route path="/page1">
-          Page 1
-          {/* <Page1 /> */}
+          <Page1 countries={countries} />
         </Route>
         <Route path="/page2">
-          Page 2
-          {/* <Page2 /> */}
+          <Page2 countries={countries} />
         </Route>
         <Route path="/page3">
-          Page 3
-          {/* <Page3 /> */}
+          <Page3 countries={countries} />
         </Route>
       </Switch>
     </Router>

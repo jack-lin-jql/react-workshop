@@ -3,46 +3,41 @@ import { useState, useEffect } from "react";
 import { wrappedFetch } from "../../utils";
 
 export const Page1 = (props) => {
-  const [universities, setUniversities] = useState();
+  const [publicAPIs, setPublicAPIs] = useState();
 
   useEffect(
     () => {
-      wrappedFetch(
-        "http://universities.hipolabs.com/search?country=United+Kingdom"
-      )
-        .then((resp) => setUniversities(resp))
+      wrappedFetch("https://api.publicapis.org/entries")
+        .then((resp) => setPublicAPIs(resp.entries))
         .catch((error) => {
           console.log(error.toString());
-          setUniversities([]);
+          setPublicAPIs([]);
         });
     },
     // Dependency list, if empty, runs the callback function once
     []
   );
 
-  if (!universities) return <div>Loading...</div>;
+  if (!publicAPIs) return <div>Loading...</div>;
 
   return (
     <table>
       <thead>
         <tr>
-          {["University", "Country", "Web Site"].map((headerTitle) => (
+          {["Name", "Category", "Description", "Link"].map((headerTitle) => (
             <th key={headerTitle}>{headerTitle}</th>
           ))}
         </tr>
       </thead>
       <tbody>
-        {universities.map((university, index) => (
+        {publicAPIs.map((publicAPI, index) => (
           <tr key={index}>
-            <td>{university.name}</td>
-            <td>{university.country}</td>
+            <td>{publicAPI.API}</td>
+            <td>{publicAPI.Category}</td>
+            <td>{publicAPI.Description}</td>
             <td>
-              <a
-                target="_blank"
-                rel="noreferrer"
-                href={university.web_pages[0]}
-              >
-                Link
+              <a target="_blank" rel="noreferrer" href={publicAPI.Link}>
+                Click me!
               </a>
             </td>
           </tr>
